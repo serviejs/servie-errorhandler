@@ -1,0 +1,129 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`servie-errorhandler should not render stack in production 1`] = `
+Object {
+  "body": "{\\"error\\":{\\"message\\":\\"boom!\\",\\"stack\\":\\"Error: boom!\\\\n    at Object.<anonymous> (/Users/blakeembrey/Projects/blakeembrey/node-servie-errorhandler/src/index.spec.ts:27:27)\\\\n    at Object.<anonymous> (/Users/blakeembrey/Projects/blakeembrey/node-servie-errorhandler/node_modules/jest-jasmine2/build/jasmine-async.js:42:32)\\\\n    at attemptAsync (/Users/blakeembrey/Projects/blakeembrey/node-servie-errorhandler/node_modules/jest-jasmine2/vendor/jasmine-2.5.2.js:1984:24)\\\\n    at QueueRunner.run (/Users/blakeembrey/Projects/blakeembrey/node-servie-errorhandler/node_modules/jest-jasmine2/vendor/jasmine-2.5.2.js:1939:9)\\\\n    at /Users/blakeembrey/Projects/blakeembrey/node-servie-errorhandler/node_modules/jest-jasmine2/vendor/jasmine-2.5.2.js:1966:16\\\\n    at /Users/blakeembrey/Projects/blakeembrey/node-servie-errorhandler/node_modules/jest-jasmine2/vendor/jasmine-2.5.2.js:1909:9\\\\n    at Object.fn (/Users/blakeembrey/Projects/blakeembrey/node-servie-errorhandler/node_modules/jest-jasmine2/build/jasmine-async.js:68:11)\\\\n    at attemptAsync (/Users/blakeembrey/Projects/blakeembrey/node-servie-errorhandler/node_modules/jest-jasmine2/vendor/jasmine-2.5.2.js:1984:24)\\\\n    at QueueRunner.run (/Users/blakeembrey/Projects/blakeembrey/node-servie-errorhandler/node_modules/jest-jasmine2/vendor/jasmine-2.5.2.js:1939:9)\\\\n    at QueueRunner.execute (/Users/blakeembrey/Projects/blakeembrey/node-servie-errorhandler/node_modules/jest-jasmine2/vendor/jasmine-2.5.2.js:1927:10)\\"}}",
+  "bytesTransferred": 0,
+  "finished": false,
+  "headers": Object {
+    "content-length": "1470",
+    "content-type": "application/json",
+    "x-content-type-options": "nosniff",
+  },
+  "started": false,
+  "status": 500,
+  "statusText": undefined,
+  "trailers": Object {},
+}
+`;
+
+exports[`servie-errorhandler should render a html response 1`] = `
+Object {
+  "body": "<!doctype html>
+<html>
+  <head>
+    <meta charset=\\"utf-8\\">
+    <title>500 Error</title>
+    <style>*{margin:0;padding:0;outline:0}
+body{padding:80px 100px;font:13px \\"Helvetica Neue\\", \\"Lucida Grande\\", \\"Arial\\";background:#ECE9E9 -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fff), to(#ECE9E9));background:#ECE9E9 -moz-linear-gradient(top, #fff, #ECE9E9);background-repeat:no-repeat;color:#555;-webkit-font-smoothing:antialiased}
+h1,h2{font-size:22px;color:#343434}
+h1{font-size:60px;margin-bottom:10px}
+ul li{list-style:none}
+#validations{margin-bottom:10px}
+#stacktrace{margin-left:60px}</style>
+  </head>
+  <body>
+    <div id=\\"wrapper\\">
+      <h1>500 Error</h1>
+      <h2>boom!</h2>
+      <ul id=\\"stacktrace\\"><li>Error: boom!</li>
+<li>    at Object.&lt;anonymous&gt; (/Users/blakeembrey/Projects/blakeembrey/node-servie-errorhandler/src/index.spec.ts:15:27)</li>
+<li>    at Object.&lt;anonymous&gt; (/Users/blakeembrey/Projects/blakeembrey/node-servie-errorhandler/node_modules/jest-jasmine2/build/jasmine-async.js:42:32)</li>
+<li>    at attemptAsync (/Users/blakeembrey/Projects/blakeembrey/node-servie-errorhandler/node_modules/jest-jasmine2/vendor/jasmine-2.5.2.js:1984:24)</li>
+<li>    at QueueRunner.run (/Users/blakeembrey/Projects/blakeembrey/node-servie-errorhandler/node_modules/jest-jasmine2/vendor/jasmine-2.5.2.js:1939:9)</li>
+<li>    at /Users/blakeembrey/Projects/blakeembrey/node-servie-errorhandler/node_modules/jest-jasmine2/vendor/jasmine-2.5.2.js:1966:16</li>
+<li>    at /Users/blakeembrey/Projects/blakeembrey/node-servie-errorhandler/node_modules/jest-jasmine2/vendor/jasmine-2.5.2.js:1909:9</li>
+<li>    at Object.fn (/Users/blakeembrey/Projects/blakeembrey/node-servie-errorhandler/node_modules/jest-jasmine2/build/jasmine-async.js:68:11)</li>
+<li>    at attemptAsync (/Users/blakeembrey/Projects/blakeembrey/node-servie-errorhandler/node_modules/jest-jasmine2/vendor/jasmine-2.5.2.js:1984:24)</li>
+<li>    at QueueRunner.run (/Users/blakeembrey/Projects/blakeembrey/node-servie-errorhandler/node_modules/jest-jasmine2/vendor/jasmine-2.5.2.js:1939:9)</li>
+<li>    at QueueRunner.execute (/Users/blakeembrey/Projects/blakeembrey/node-servie-errorhandler/node_modules/jest-jasmine2/vendor/jasmine-2.5.2.js:1927:10)</li></ul>
+    </div>
+  </body>
+</html>",
+  "bytesTransferred": 0,
+  "finished": false,
+  "headers": Object {
+    "content-length": "2275",
+    "content-type": "text/html; charset=utf-8",
+    "x-content-type-options": "nosniff",
+  },
+  "started": false,
+  "status": 500,
+  "statusText": undefined,
+  "trailers": Object {},
+}
+`;
+
+exports[`servie-errorhandler should render a json response 1`] = `
+Object {
+  "body": "{\\"error\\":{\\"message\\":\\"boom!\\",\\"stack\\":\\"Error: boom!\\\\n    at Object.<anonymous> (/Users/blakeembrey/Projects/blakeembrey/node-servie-errorhandler/src/index.spec.ts:21:27)\\\\n    at Object.<anonymous> (/Users/blakeembrey/Projects/blakeembrey/node-servie-errorhandler/node_modules/jest-jasmine2/build/jasmine-async.js:42:32)\\\\n    at attemptAsync (/Users/blakeembrey/Projects/blakeembrey/node-servie-errorhandler/node_modules/jest-jasmine2/vendor/jasmine-2.5.2.js:1984:24)\\\\n    at QueueRunner.run (/Users/blakeembrey/Projects/blakeembrey/node-servie-errorhandler/node_modules/jest-jasmine2/vendor/jasmine-2.5.2.js:1939:9)\\\\n    at /Users/blakeembrey/Projects/blakeembrey/node-servie-errorhandler/node_modules/jest-jasmine2/vendor/jasmine-2.5.2.js:1966:16\\\\n    at /Users/blakeembrey/Projects/blakeembrey/node-servie-errorhandler/node_modules/jest-jasmine2/vendor/jasmine-2.5.2.js:1909:9\\\\n    at Object.fn (/Users/blakeembrey/Projects/blakeembrey/node-servie-errorhandler/node_modules/jest-jasmine2/build/jasmine-async.js:68:11)\\\\n    at attemptAsync (/Users/blakeembrey/Projects/blakeembrey/node-servie-errorhandler/node_modules/jest-jasmine2/vendor/jasmine-2.5.2.js:1984:24)\\\\n    at QueueRunner.run (/Users/blakeembrey/Projects/blakeembrey/node-servie-errorhandler/node_modules/jest-jasmine2/vendor/jasmine-2.5.2.js:1939:9)\\\\n    at QueueRunner.execute (/Users/blakeembrey/Projects/blakeembrey/node-servie-errorhandler/node_modules/jest-jasmine2/vendor/jasmine-2.5.2.js:1927:10)\\"}}",
+  "bytesTransferred": 0,
+  "finished": false,
+  "headers": Object {
+    "content-length": "1470",
+    "content-type": "application/json",
+    "x-content-type-options": "nosniff",
+  },
+  "started": false,
+  "status": 500,
+  "statusText": undefined,
+  "trailers": Object {},
+}
+`;
+
+exports[`servie-errorhandler should render a plain response 1`] = `
+Object {
+  "body": "<!doctype html>
+<html>
+  <head>
+    <meta charset=\\"utf-8\\">
+    <title>500 Error</title>
+    <style>*{margin:0;padding:0;outline:0}
+body{padding:80px 100px;font:13px \\"Helvetica Neue\\", \\"Lucida Grande\\", \\"Arial\\";background:#ECE9E9 -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fff), to(#ECE9E9));background:#ECE9E9 -moz-linear-gradient(top, #fff, #ECE9E9);background-repeat:no-repeat;color:#555;-webkit-font-smoothing:antialiased}
+h1,h2{font-size:22px;color:#343434}
+h1{font-size:60px;margin-bottom:10px}
+ul li{list-style:none}
+#validations{margin-bottom:10px}
+#stacktrace{margin-left:60px}</style>
+  </head>
+  <body>
+    <div id=\\"wrapper\\">
+      <h1>500 Error</h1>
+      <h2>boom!</h2>
+      <ul id=\\"stacktrace\\"><li>Error: boom!</li>
+<li>    at Object.&lt;anonymous&gt; (/Users/blakeembrey/Projects/blakeembrey/node-servie-errorhandler/src/index.spec.ts:9:27)</li>
+<li>    at Object.&lt;anonymous&gt; (/Users/blakeembrey/Projects/blakeembrey/node-servie-errorhandler/node_modules/jest-jasmine2/build/jasmine-async.js:42:32)</li>
+<li>    at attemptAsync (/Users/blakeembrey/Projects/blakeembrey/node-servie-errorhandler/node_modules/jest-jasmine2/vendor/jasmine-2.5.2.js:1984:24)</li>
+<li>    at QueueRunner.run (/Users/blakeembrey/Projects/blakeembrey/node-servie-errorhandler/node_modules/jest-jasmine2/vendor/jasmine-2.5.2.js:1939:9)</li>
+<li>    at /Users/blakeembrey/Projects/blakeembrey/node-servie-errorhandler/node_modules/jest-jasmine2/vendor/jasmine-2.5.2.js:1966:16</li>
+<li>    at /Users/blakeembrey/Projects/blakeembrey/node-servie-errorhandler/node_modules/jest-jasmine2/vendor/jasmine-2.5.2.js:1909:9</li>
+<li>    at Object.fn (/Users/blakeembrey/Projects/blakeembrey/node-servie-errorhandler/node_modules/jest-jasmine2/build/jasmine-async.js:68:11)</li>
+<li>    at attemptAsync (/Users/blakeembrey/Projects/blakeembrey/node-servie-errorhandler/node_modules/jest-jasmine2/vendor/jasmine-2.5.2.js:1984:24)</li>
+<li>    at QueueRunner.run (/Users/blakeembrey/Projects/blakeembrey/node-servie-errorhandler/node_modules/jest-jasmine2/vendor/jasmine-2.5.2.js:1939:9)</li>
+<li>    at QueueRunner.execute (/Users/blakeembrey/Projects/blakeembrey/node-servie-errorhandler/node_modules/jest-jasmine2/vendor/jasmine-2.5.2.js:1927:10)</li></ul>
+    </div>
+  </body>
+</html>",
+  "bytesTransferred": 0,
+  "finished": false,
+  "headers": Object {
+    "content-length": "2274",
+    "content-type": "text/html; charset=utf-8",
+    "x-content-type-options": "nosniff",
+  },
+  "started": false,
+  "status": 500,
+  "statusText": undefined,
+  "trailers": Object {},
+}
+`;
