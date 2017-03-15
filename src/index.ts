@@ -6,7 +6,7 @@ const env = process.env.NODE_ENV
 
 export interface Options {
   production?: boolean
-  log?: ((value: any) => void) | boolean
+  log?: (value: any) => void
 }
 
 /**
@@ -14,7 +14,6 @@ export interface Options {
  */
 export function errorhandler (req: Request, options: Options = {}): (err: any) => Response {
   const production = options.production === undefined ? env === 'production' : !!options.production
-  const log = logger(options.log, production)
 
   if (production) {
     return function (err: any) {
@@ -24,6 +23,8 @@ export function errorhandler (req: Request, options: Options = {}): (err: any) =
       return render(req, message, status, undefined)
     }
   }
+
+  const log = typeof options.log === 'function' ? options.log : console.error
 
   return function (err: any) {
     const message = err.message || JSON.stringify(err)
@@ -114,19 +115,4 @@ ul li{list-style:none}
   </body>
 </html>`
   })
-}
-
-/**
- * Create a log function depending on environment.
- */
-function logger (log: boolean | undefined | ((err: any) => void), production: boolean): (err: any) => void {
-  if (log === false) {
-    return () => undefined
-  }
-
-  if (typeof log === 'function') {
-    return log
-  }
-
-  return production ? (() => undefined) : console.error.bind(console)
 }
