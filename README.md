@@ -1,11 +1,10 @@
 # Servie Errorhandler
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/blakeembrey/node-servie-errorhandler.svg)](https://greenkeeper.io/)
-
 [![NPM version][npm-image]][npm-url]
 [![NPM downloads][downloads-image]][downloads-url]
 [![Build status][travis-image]][travis-url]
 [![Test coverage][coveralls-image]][coveralls-url]
+[![Greenkeeper badge](https://badges.greenkeeper.io/blakeembrey/node-servie-errorhandler.svg)](https://greenkeeper.io/)
 
 > Map errors to a Servie response.
 
