@@ -21,8 +21,9 @@ import { finalhandler } from 'servie-finalhandler'
 import { errorhandler } from 'servie-errorhandler'
 
 const app = compose([get(...), post(...)])
+const req = new Request({ url: '/' })
 
-app(new Request({ url: '/' }), finalhandler).catch(errorhandler)
+app(req, finalhandler(req)).catch(errorhandler(req))
 ```
 
 ## TypeScript
