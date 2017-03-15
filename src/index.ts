@@ -2,6 +2,8 @@ import escape = require('escape-html')
 import accepts = require('accepts')
 import { Request, Response } from 'servie'
 
+const env = process.env.NODE_ENV
+
 export interface Options {
   production?: boolean
   log?: ((value: any) => void) | boolean
@@ -11,7 +13,7 @@ export interface Options {
  * Render errors into a response object.
  */
 export function errorhandler (req: Request, options: Options = {}): (err: any) => Response {
-  const production = isProduction(options.production)
+  const production = options.production === undefined ? env === 'production' : !!options.production
   const log = logger(options.log, production)
 
   if (production) {
@@ -106,7 +108,7 @@ ul li{list-style:none}
   <body>
     <div id="wrapper">
       <h1>${status} Error</h1>
-      <h2>${message}</h2>
+      <h2>${escape(message)}</h2>
       ${stack ? `<ul id="stacktrace">${stack.split('\n').map(x => `<li>${escape(x)}</li>`).join('\n')}</ul>` : ''}
     </div>
   </body>
@@ -127,11 +129,4 @@ function logger (log: boolean | undefined | ((err: any) => void), production: bo
   }
 
   return production ? (() => undefined) : console.error.bind(console)
-}
-
-/**
- * Check for production environment.
- */
-function isProduction (production?: boolean) {
-  return production === undefined ? process.env.NODE_ENV === 'production' : !!production
 }
