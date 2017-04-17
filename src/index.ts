@@ -99,12 +99,11 @@ function renderHtml (message: string, status: number, stack?: string) {
     <meta charset="utf-8">
     <title>${status} Error</title>
     <style>*{margin:0;padding:0;outline:0}
-body{padding:80px 100px;font:13px "Helvetica Neue", "Lucida Grande", "Arial";background:#ECE9E9 -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fff), to(#ECE9E9));background:#ECE9E9 -moz-linear-gradient(top, #fff, #ECE9E9);background-repeat:no-repeat;color:#555;-webkit-font-smoothing:antialiased}
-h1,h2{font-size:22px;color:#343434}
-h1{font-size:60px;margin-bottom:10px}
+body{padding:80px 100px;font:13px "Helvetica Neue", "Lucida Grande", "Arial";color:#555;background:#eee}
+h1,h2{font-size:22px;color:#333;margin-bottom:20px}
+h1{font-size:60px}
 ul li{list-style:none}
-#validations{margin-bottom:10px}
-#stacktrace{margin-left:60px}</style>
+#stacktrace{margin-left:30px}</style>
   </head>
   <body>
     <div id="wrapper">
