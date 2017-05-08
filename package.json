@@ -1,6 +1,6 @@
 {
   "name": "servie-errorhandler",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Map errors to a Servie response",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
