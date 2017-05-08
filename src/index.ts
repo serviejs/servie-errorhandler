@@ -75,7 +75,7 @@ function renderJson (message: string, status: number, stack?: string) {
     status,
     headers: {
       'X-Content-Type-Options': 'nosniff',
-      'Content-Type': 'text/html; charset=utf-8'
+      'Content-Type': 'application/json'
     },
     body: {
       error: { message, stack }
