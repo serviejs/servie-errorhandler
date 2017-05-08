@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/blakeembrey/node-servie-errorhandler.git"
+    "url": "git://github.com/serviejs/servie-errorhandler.git"
   },
   "keywords": [
     "servie",
@@ -32,9 +32,9 @@
   },
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/blakeembrey/node-servie-errorhandler/issues"
+    "url": "https://github.com/serviejs/servie-errorhandler/issues"
   },
-  "homepage": "https://github.com/blakeembrey/node-servie-errorhandler",
+  "homepage": "https://github.com/serviejs/servie-errorhandler",
   "jest": {
     "testEnvironment": "node",
     "transform": {
