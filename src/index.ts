@@ -1,7 +1,7 @@
 import { STATUS_CODES } from 'http'
 import escapeHtml = require('escape-html')
-import { Request, Response, HeadersValuesObject } from 'servie'
-import { sendHtml } from 'servie-send'
+import { Request, Response, HeadersValuesObject, createHeaders } from 'servie'
+import { createBody } from 'servie/dist/body/universal'
 
 const DOUBLE_SPACE_REGEXP = /\x20{2}/g
 const NEWLINE_REGEXP = /\n/g
@@ -45,25 +45,26 @@ export function errorhandler (req: Request, options: Options = {}): (err: any) =
  *
  * Reference: https://github.com/pillarjs/finalhandler/blob/master/index.js
  */
-function render (req: Request, statusCode: number, message: string, headers?: HeadersValuesObject) {
-  const body = escapeHtml(message)
-  .replace(NEWLINE_REGEXP, '<br>')
-  .replace(DOUBLE_SPACE_REGEXP, ' &nbsp;')
+function render (req: Request, statusCode: number, message: string, errorHeaders?: HeadersValuesObject) {
+  const data = escapeHtml(message)
+    .replace(NEWLINE_REGEXP, '<br>')
+    .replace(DOUBLE_SPACE_REGEXP, ' &nbsp;')
 
-  const payload = `<!doctype html>
+  const body = createBody(`<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <title>Error</title>
 </head>
 <body>
-<pre>${body}</pre>
+<pre>${data}</pre>
 </body>
 </html>
-`
+`)
 
-  const res = sendHtml(req, payload, { statusCode, headers })
-  res.headers.set('Content-Security-Policy', "default-src 'self'")
-  res.headers.set('X-Content-Type-Options', 'nosniff')
-  return res
+  const headers = createHeaders(errorHeaders)
+  headers.set('Content-Type', 'text/html; charset=utf-8')
+  headers.set('Content-Security-Policy', "default-src 'self'")
+  headers.set('X-Content-Type-Options', 'nosniff')
+  return new Response({ statusCode, headers, body })
 }

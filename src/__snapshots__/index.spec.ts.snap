@@ -15,8 +15,7 @@ Object {
   "finished": false,
   "headers": Object {
     "content-security-policy": "default-src 'self'",
-    "content-type": "text/html",
-    "etag": "\\"nEMR0dTcxiXzva8aD5LjL8jzN8k3Yr+BdwzoIBimObQ=\\"",
+    "content-type": "text/html; charset=utf-8",
     "x-content-type-options": "nosniff",
   },
   "started": false,
@@ -41,8 +40,7 @@ Object {
   "finished": false,
   "headers": Object {
     "content-security-policy": "default-src 'self'",
-    "content-type": "text/html",
-    "etag": "\\"nEMR0dTcxiXzva8aD5LjL8jzN8k3Yr+BdwzoIBimObQ=\\"",
+    "content-type": "text/html; charset=utf-8",
     "x-content-type-options": "nosniff",
   },
   "started": false,
@@ -67,8 +65,7 @@ Object {
   "finished": false,
   "headers": Object {
     "content-security-policy": "default-src 'self'",
-    "content-type": "text/html",
-    "etag": "\\"s+vHeYEiI9G5/tPGBZZs5hJ15xDF68ktGk3d/KknTQU=\\"",
+    "content-type": "text/html; charset=utf-8",
     "x-content-type-options": "nosniff",
   },
   "started": false,

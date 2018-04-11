@@ -67,7 +67,6 @@
   },
   "dependencies": {
     "@types/escape-html": "0.0.20",
-    "escape-html": "^1.0.3",
-    "servie-send": "^1.0.0"
+    "escape-html": "^1.0.3"
   }
 }
