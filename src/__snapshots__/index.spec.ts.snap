@@ -1,90 +1,79 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`servie-errorhandler should render a html response 1`] = `
+exports[`servie-errorhandler should render an error 1`] = `
 Object {
-  "body": "<!doctype html>
-<html>
-  <head>
-    <meta charset=\\"utf-8\\">
-    <title>500 Error</title>
-    <style>*{margin:0;padding:0;outline:0}
-body{padding:80px 100px;font:13px \\"Helvetica Neue\\", \\"Lucida Grande\\", \\"Arial\\";color:#555;background:#eee}
-h1,h2{font-size:22px;color:#333;margin-bottom:20px}
-h1{font-size:60px}
-ul li{list-style:none}
-#stacktrace{margin-left:30px}</style>
-  </head>
-  <body>
-    <div id=\\"wrapper\\">
-      <h1>500 Error</h1>
-      <h2>boom!</h2>
-      
-    </div>
-  </body>
-</html>",
+  "body": Object {
+    "bodyUsed": false,
+    "buffered": true,
+    "hasBody": true,
+    "headers": Object {
+      "content-length": "148",
+      "content-type": "text/plain",
+    },
+  },
   "bytesTransferred": 0,
   "finished": false,
   "headers": Object {
-    "content-length": "491",
-    "content-type": "text/html; charset=utf-8",
+    "content-security-policy": "default-src 'self'",
+    "content-type": "text/html",
+    "etag": "\\"nEMR0dTcxiXzva8aD5LjL8jzN8k3Yr+BdwzoIBimObQ=\\"",
     "x-content-type-options": "nosniff",
   },
   "started": false,
-  "status": 500,
-  "statusText": undefined,
+  "statusCode": 500,
+  "statusMessage": undefined,
   "trailers": Object {},
 }
 `;
 
-exports[`servie-errorhandler should render a json response 1`] = `
+exports[`servie-errorhandler should render boom status errors 1`] = `
 Object {
-  "body": "{\\"error\\":{\\"message\\":\\"boom!\\"}}",
+  "body": Object {
+    "bodyUsed": false,
+    "buffered": true,
+    "hasBody": true,
+    "headers": Object {
+      "content-length": "148",
+      "content-type": "text/plain",
+    },
+  },
   "bytesTransferred": 0,
   "finished": false,
   "headers": Object {
-    "content-length": "29",
-    "content-type": "application/json",
+    "content-security-policy": "default-src 'self'",
+    "content-type": "text/html",
+    "etag": "\\"nEMR0dTcxiXzva8aD5LjL8jzN8k3Yr+BdwzoIBimObQ=\\"",
     "x-content-type-options": "nosniff",
   },
   "started": false,
-  "status": 500,
-  "statusText": undefined,
+  "statusCode": 500,
+  "statusMessage": undefined,
   "trailers": Object {},
 }
 `;
 
-exports[`servie-errorhandler should render a plain response 1`] = `
+exports[`servie-errorhandler should render http errors status error 1`] = `
 Object {
-  "body": "<!doctype html>
-<html>
-  <head>
-    <meta charset=\\"utf-8\\">
-    <title>500 Error</title>
-    <style>*{margin:0;padding:0;outline:0}
-body{padding:80px 100px;font:13px \\"Helvetica Neue\\", \\"Lucida Grande\\", \\"Arial\\";color:#555;background:#eee}
-h1,h2{font-size:22px;color:#333;margin-bottom:20px}
-h1{font-size:60px}
-ul li{list-style:none}
-#stacktrace{margin-left:30px}</style>
-  </head>
-  <body>
-    <div id=\\"wrapper\\">
-      <h1>500 Error</h1>
-      <h2>boom!</h2>
-      
-    </div>
-  </body>
-</html>",
+  "body": Object {
+    "bodyUsed": false,
+    "buffered": true,
+    "hasBody": true,
+    "headers": Object {
+      "content-length": "138",
+      "content-type": "text/plain",
+    },
+  },
   "bytesTransferred": 0,
   "finished": false,
   "headers": Object {
-    "content-length": "491",
-    "content-type": "text/html; charset=utf-8",
+    "content-security-policy": "default-src 'self'",
+    "content-type": "text/html",
+    "etag": "\\"s+vHeYEiI9G5/tPGBZZs5hJ15xDF68ktGk3d/KknTQU=\\"",
     "x-content-type-options": "nosniff",
   },
   "started": false,
-  "status": 500,
-  "statusText": undefined,
+  "statusCode": 400,
+  "statusMessage": undefined,
   "trailers": Object {},
 }
 `;

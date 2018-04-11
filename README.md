@@ -4,7 +4,6 @@
 [![NPM downloads](https://img.shields.io/npm/dm/servie-errorhandler.svg?style=flat)](https://npmjs.org/package/servie-errorhandler)
 [![Build status](https://img.shields.io/travis/serviejs/servie-errorhandler.svg?style=flat)](https://travis-ci.org/serviejs/servie-errorhandler)
 [![Test coverage](https://img.shields.io/coveralls/serviejs/servie-errorhandler.svg?style=flat)](https://coveralls.io/r/serviejs/servie-errorhandler?branch=master)
-[![Greenkeeper badge](https://badges.greenkeeper.io/serviejs/servie-errorhandler.svg)](https://greenkeeper.io/)
 
 > Map errors to a Servie response.
 
@@ -17,6 +16,7 @@ npm install servie-errorhandler --save
 ## Usage
 
 ```ts
+import { Request } from 'servie'
 import { finalhandler } from 'servie-finalhandler'
 import { errorhandler } from 'servie-errorhandler'
 

@@ -1,8 +1,10 @@
-import escape = require('escape-html')
-import accepts = require('accepts')
-import { Request, Response } from 'servie'
+import { STATUS_CODES } from 'http'
+import escapeHtml = require('escape-html')
+import { Request, Response, HeadersValuesObject } from 'servie'
+import { sendHtml } from 'servie-send'
 
-const env = process.env.NODE_ENV
+const DOUBLE_SPACE_REGEXP = /\x20{2}/g
+const NEWLINE_REGEXP = /\n/g
 
 export interface Options {
   production?: boolean
@@ -13,105 +15,55 @@ export interface Options {
  * Render errors into a response object.
  */
 export function errorhandler (req: Request, options: Options = {}): (err: any) => Response {
-  const production = options.production === undefined ? env === 'production' : !!options.production
+  const { production = process.env.NODE_ENV === 'production' } = options
+  const log = options.log || (production ? ((x: any) => undefined) : console.error)
 
   if (production) {
-    return function (err: any) {
-      const message = err.message || JSON.stringify(err)
-      const status = Number(err.status) || 500
+    return function (error: any) {
+      const statusCode = Number(error.statusCode) || 500
+      const headers = typeof error.headers === 'object' ? error.headers : undefined
 
-      return render(req, message, status, undefined)
+      log(error)
+
+      return render(req, statusCode, STATUS_CODES[statusCode], headers)
     }
   }
 
-  const log = typeof options.log === 'function' ? options.log : console.error
+  return function (error: any) {
+    const statusCode = Number(error.statusCode) || 500
+    const headers = typeof error.headers === 'object' ? error.headers : undefined
+    const message = error.stack || error.message || STATUS_CODES[statusCode]
 
-  return function (err: any) {
-    const message = err.message || JSON.stringify(err)
-    const status = Number(err.status) || 500
+    log(error)
 
-    log(err)
-
-    return render(req, message, status, err.stack)
+    return render(req, statusCode, message, headers)
   }
 }
 
 /**
- * Switch between renderers based on accepts.
+ * Render HTML response.
+ *
+ * Reference: https://github.com/pillarjs/finalhandler/blob/master/index.js
  */
-function render (req: Request, message: string, status: number, stack?: string) {
-  const type = accepts({ headers: req.headers.object() }).type(['html', 'json'])
+function render (req: Request, statusCode: number, message: string, headers?: HeadersValuesObject) {
+  const body = escapeHtml(message)
+  .replace(NEWLINE_REGEXP, '<br>')
+  .replace(DOUBLE_SPACE_REGEXP, ' &nbsp;')
 
-  if (type === 'html') {
-    return renderHtml(message, status, stack)
-  }
+  const payload = `<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Error</title>
+</head>
+<body>
+<pre>${body}</pre>
+</body>
+</html>
+`
 
-  if (type === 'json') {
-    return renderJson(message, status, stack)
-  }
-
-  return renderPlain(message, status, stack)
-}
-
-/**
- * Render the error as plain text.
- */
-function renderPlain (message: string, status: number, stack?: string) {
-  return new Response({
-    status,
-    headers: {
-      'X-Content-Type-Options': 'nosniff',
-      'Content-Type': 'text/plain; charset=utf-8'
-    },
-    body: stack || message
-  })
-}
-
-/**
- * Render the error as JSON.
- */
-function renderJson (message: string, status: number, stack?: string) {
-  return new Response({
-    status,
-    headers: {
-      'X-Content-Type-Options': 'nosniff',
-      'Content-Type': 'application/json'
-    },
-    body: {
-      error: { message, stack }
-    }
-  })
-}
-
-/**
- * Render the error page as HTML.
- */
-function renderHtml (message: string, status: number, stack?: string) {
-  return new Response({
-    status,
-    headers: {
-      'X-Content-Type-Options': 'nosniff',
-      'Content-Type': 'text/html; charset=utf-8'
-    },
-    body: `<!doctype html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>${status} Error</title>
-    <style>*{margin:0;padding:0;outline:0}
-body{padding:80px 100px;font:13px "Helvetica Neue", "Lucida Grande", "Arial";color:#555;background:#eee}
-h1,h2{font-size:22px;color:#333;margin-bottom:20px}
-h1{font-size:60px}
-ul li{list-style:none}
-#stacktrace{margin-left:30px}</style>
-  </head>
-  <body>
-    <div id="wrapper">
-      <h1>${status} Error</h1>
-      <h2>${escape(message)}</h2>
-      ${stack ? `<ul id="stacktrace">${stack.split('\n').map(x => `<li>${escape(x)}</li>`).join('\n')}</ul>` : ''}
-    </div>
-  </body>
-</html>`
-  })
+  const res = sendHtml(req, payload, { statusCode, headers })
+  res.headers.set('Content-Security-Policy', "default-src 'self'")
+  res.headers.set('X-Content-Type-Options', 'nosniff')
+  return res
 }
