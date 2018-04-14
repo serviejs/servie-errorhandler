@@ -21,7 +21,6 @@ Object {
   "started": false,
   "statusCode": 500,
   "statusMessage": undefined,
-  "trailers": Object {},
 }
 `;
 
@@ -46,7 +45,6 @@ Object {
   "started": false,
   "statusCode": 500,
   "statusMessage": undefined,
-  "trailers": Object {},
 }
 `;
 
@@ -71,6 +69,5 @@ Object {
   "started": false,
   "statusCode": 400,
   "statusMessage": undefined,
-  "trailers": Object {},
 }
 `;

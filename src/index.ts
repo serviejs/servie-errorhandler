@@ -25,7 +25,7 @@ export function errorhandler (req: Request, options: Options = {}): (err: any) =
 
       log(error)
 
-      return render(req, statusCode, STATUS_CODES[statusCode], headers)
+      return render(req, statusCode, STATUS_CODES[statusCode] || 'Error', headers)
     }
   }
 
