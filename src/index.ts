@@ -7,6 +7,7 @@ import Negotiator = require('negotiator')
 const DOUBLE_SPACE_REGEXP = /\x20{2}/g
 
 export interface Options {
+  production?: boolean
   log?: (err: any) => void
 }
 
@@ -15,18 +16,13 @@ export interface Options {
  */
 export function errorhandler (req: Request, options: Options = {}): (err: any) => Response {
   const env = process.env.NODE_ENV || 'development'
+  const production = options.production === true || env === 'production'
   const log = options.log || (env === 'test' ? Function.prototype : console.error)
 
   return function errorhandler (err: any) {
-    const output = toOutput(err)
-    const negotiator = new Negotiator({ headers: req.allHeaders.asObject() })
-    const type = negotiator.mediaType(['text/html', 'application/json'])
-
+    const output = toOutput(err, production)
     log(err)
-
-    if (type === 'text/html') return renderHtml(req, output)
-
-    return renderJson(req, output)
+    return render(req, output)
   }
 }
 
@@ -42,17 +38,29 @@ interface Output {
 /**
  * Convert an error into an "output" object.
  */
-function toOutput (err: any): Output {
+function toOutput (err: any, production: boolean): Output {
   const output = err.output || {}
   const statusCode = Number(output.statusCode || err.statusCode) || 500
   const headers = output.headers || err.headers || {}
   const payload = output.payload || {
     statusCode,
     error: STATUS_CODES[statusCode] || 'Error',
-    message: err.message || 'Error'
+    message: (production ? undefined : err.message) || 'Error'
   }
 
   return { statusCode, headers, payload }
+}
+
+/**
+ * Render HTTP response.
+ */
+function render (req: Request, output: Output) {
+  const negotiator = new Negotiator({ headers: req.allHeaders.asObject() })
+  const type = negotiator.mediaType(['text/html', 'application/json'])
+
+  if (type === 'text/html') return renderHtml(req, output)
+
+  return renderJson(req, output)
 }
 
 /**
