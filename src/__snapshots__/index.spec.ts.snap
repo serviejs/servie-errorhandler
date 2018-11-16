@@ -1,13 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`servie-errorhandler should render an error 1`] = `
+exports[`servie-errorhandler should fail "gracefully" with non-error 1`] = `
 Object {
   "body": Object {
     "bodyUsed": false,
     "buffered": true,
     "hasBody": true,
     "headers": Object {
-      "content-length": "148",
+      "content-length": "269",
       "content-type": "text/plain",
     },
   },
@@ -15,7 +15,31 @@ Object {
   "finished": false,
   "headers": Object {
     "content-security-policy": "default-src 'self'",
-    "content-type": "text/html; charset=utf-8",
+    "content-type": "text/html",
+    "x-content-type-options": "nosniff",
+  },
+  "started": false,
+  "statusCode": 500,
+  "statusMessage": undefined,
+}
+`;
+
+exports[`servie-errorhandler should render an error 1`] = `
+Object {
+  "body": Object {
+    "bodyUsed": false,
+    "buffered": true,
+    "hasBody": true,
+    "headers": Object {
+      "content-length": "269",
+      "content-type": "text/plain",
+    },
+  },
+  "bytesTransferred": 0,
+  "finished": false,
+  "headers": Object {
+    "content-security-policy": "default-src 'self'",
+    "content-type": "text/html",
     "x-content-type-options": "nosniff",
   },
   "started": false,
@@ -31,7 +55,7 @@ Object {
     "buffered": true,
     "hasBody": true,
     "headers": Object {
-      "content-length": "148",
+      "content-length": "271",
       "content-type": "text/plain",
     },
   },
@@ -39,11 +63,11 @@ Object {
   "finished": false,
   "headers": Object {
     "content-security-policy": "default-src 'self'",
-    "content-type": "text/html; charset=utf-8",
+    "content-type": "text/html",
     "x-content-type-options": "nosniff",
   },
   "started": false,
-  "statusCode": 500,
+  "statusCode": 400,
   "statusMessage": undefined,
 }
 `;
@@ -55,7 +79,7 @@ Object {
     "buffered": true,
     "hasBody": true,
     "headers": Object {
-      "content-length": "138",
+      "content-length": "271",
       "content-type": "text/plain",
     },
   },
@@ -63,7 +87,7 @@ Object {
   "finished": false,
   "headers": Object {
     "content-security-policy": "default-src 'self'",
-    "content-type": "text/html; charset=utf-8",
+    "content-type": "text/html",
     "x-content-type-options": "nosniff",
   },
   "started": false,

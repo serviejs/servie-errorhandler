@@ -5,7 +5,7 @@
 [![Build status](https://img.shields.io/travis/serviejs/servie-errorhandler.svg?style=flat)](https://travis-ci.org/serviejs/servie-errorhandler)
 [![Test coverage](https://img.shields.io/coveralls/serviejs/servie-errorhandler.svg?style=flat)](https://coveralls.io/r/serviejs/servie-errorhandler?branch=master)
 
-> Map errors to a Servie response.
+> Map errors to a Servie response. Compatible with [`boom`](https://github.com/hapijs/boom) and [`http-errors`](https://github.com/jshttp/http-errors).
 
 ## Installation
 

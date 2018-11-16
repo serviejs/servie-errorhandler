@@ -1,70 +1,95 @@
 import { STATUS_CODES } from 'http'
 import escapeHtml = require('escape-html')
-import { Request, Response, HeadersValuesObject, createHeaders } from 'servie'
-import { createBody } from 'servie/dist/body/universal'
+import { Request, Response } from 'servie'
+import { sendJson, sendHtml } from 'servie-send'
+import Negotiator = require('negotiator')
 
 const DOUBLE_SPACE_REGEXP = /\x20{2}/g
-const NEWLINE_REGEXP = /\n/g
 
 export interface Options {
-  production?: boolean
-  log?: (value: any) => void
+  log?: (err: any) => void
 }
 
 /**
  * Render errors into a response object.
  */
 export function errorhandler (req: Request, options: Options = {}): (err: any) => Response {
-  const { production = process.env.NODE_ENV === 'production' } = options
-  const log = options.log || (production ? ((x: any) => undefined) : console.error)
+  const env = process.env.NODE_ENV || 'development'
+  const log = options.log || (env === 'test' ? Function.prototype : console.error)
 
-  if (production) {
-    return function (error: any) {
-      const statusCode = Number(error.statusCode) || 500
-      const headers = typeof error.headers === 'object' ? error.headers : undefined
+  return function errorhandler (err: any) {
+    const output = toOutput(err)
+    const negotiator = new Negotiator({ headers: req.allHeaders.asObject() })
+    const type = negotiator.mediaType(['text/html', 'application/json'])
 
-      log(error)
+    log(err)
 
-      return render(req, statusCode, STATUS_CODES[statusCode] || 'Error', headers)
-    }
-  }
+    if (type === 'text/html') return renderHtml(req, output)
 
-  return function (error: any) {
-    const statusCode = Number(error.statusCode) || 500
-    const headers = typeof error.headers === 'object' ? error.headers : undefined
-    const message = error.stack || error.message || STATUS_CODES[statusCode]
-
-    log(error)
-
-    return render(req, statusCode, message, headers)
+    return renderJson(req, output)
   }
 }
 
 /**
- * Render HTML response.
- *
- * Reference: https://github.com/pillarjs/finalhandler/blob/master/index.js
+ * Boom-compatible output.
  */
-function render (req: Request, statusCode: number, message: string, errorHeaders?: HeadersValuesObject) {
-  const data = escapeHtml(message)
-    .replace(NEWLINE_REGEXP, '<br>')
-    .replace(DOUBLE_SPACE_REGEXP, ' &nbsp;')
+interface Output {
+  statusCode: number
+  headers: Record<string, string | string[]>
+  payload: object
+}
 
-  const body = createBody(`<!doctype html>
+/**
+ * Convert an error into an "output" object.
+ */
+function toOutput (err: any): Output {
+  const output = err.output || {}
+  const statusCode = Number(output.statusCode || err.statusCode) || 500
+  const headers = output.headers || err.headers || {}
+  const payload = output.payload || {
+    statusCode,
+    error: STATUS_CODES[statusCode] || 'Error',
+    message: err.message || 'Error'
+  }
+
+  return { statusCode, headers, payload }
+}
+
+/**
+ * Render HTML response.
+ */
+function renderHtml (req: Request, output: Output) {
+  const content = escapeHtml(JSON.stringify(output.payload, null, 2))
+
+  return sendHtml(req, `
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="utf-8">
-<title>Error</title>
-</head>
+<head><meta charset="utf-8"><title>Error</title></head>
 <body>
-<pre>${data}</pre>
+<pre>${content.replace(DOUBLE_SPACE_REGEXP, ' &nbsp;')}</pre>
 </body>
 </html>
-`)
+  `.trim(), {
+    skipEtag: true,
+    statusCode: output.statusCode,
+    headers: {
+      'X-Content-Type-Options': 'nosniff',
+      'Content-Security-Policy': "default-src 'self'",
+      ...output.headers
+    }
+  })
+}
 
-  const headers = createHeaders(errorHeaders)
-  headers.set('Content-Type', 'text/html; charset=utf-8')
-  headers.set('Content-Security-Policy', "default-src 'self'")
-  headers.set('X-Content-Type-Options', 'nosniff')
-  return new Response({ statusCode, headers, body })
+/**
+ * Send JSON response.
+ */
+function renderJson (req: Request, output: Output) {
+  return sendJson(req, output.payload, {
+    skipEtag: true,
+    statusCode: output.statusCode,
+    headers: {
+      'X-Content-Type-Options': 'nosniff',
+      ...output.headers
+    }
+  })
 }
