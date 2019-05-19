@@ -21,7 +21,7 @@ import { finalhandler } from 'servie-finalhandler'
 import { errorhandler } from 'servie-errorhandler'
 
 const app = compose([get(...), post(...)])
-const req = new Request({ url: '/' })
+const req = new Request("/");
 
 app(req, finalhandler(req)).catch(errorhandler(req))
 ```
