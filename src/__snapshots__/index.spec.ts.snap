@@ -1,97 +1,109 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`servie-errorhandler should fail "gracefully" with non-error 1`] = `
-Object {
-  "body": Object {
-    "bodyUsed": false,
-    "buffered": true,
-    "hasBody": true,
-    "headers": Object {
-      "content-length": "269",
-      "content-type": "text/plain",
+Response {
+  "$rawBody": "<!doctype html>
+<html lang=\\"en\\">
+<head><meta charset=\\"utf-8\\"><title>Error</title></head>
+<body>
+<pre>{
+ &nbsp;&quot;status&quot;: 500,
+ &nbsp;&quot;error&quot;: &quot;Internal Server Error&quot;,
+ &nbsp;&quot;message&quot;: &quot;Error&quot;
+}</pre>
+</body>
+</html>",
+  "headers": Headers {
+    "object": Object {
+      "content-length": "265",
+      "content-security-policy": "default-src 'self'",
+      "content-type": "text/html",
+      "x-content-type-options": "nosniff",
     },
   },
-  "bytesTransferred": 0,
-  "finished": false,
-  "headers": Object {
-    "content-security-policy": "default-src 'self'",
-    "content-type": "text/html",
-    "x-content-type-options": "nosniff",
-  },
-  "started": false,
-  "statusCode": 500,
-  "statusMessage": undefined,
+  "status": 500,
+  "statusText": "",
+  "trailer": Promise {},
 }
 `;
 
 exports[`servie-errorhandler should render an error 1`] = `
-Object {
-  "body": Object {
-    "bodyUsed": false,
-    "buffered": true,
-    "hasBody": true,
-    "headers": Object {
-      "content-length": "269",
-      "content-type": "text/plain",
+Response {
+  "$rawBody": "<!doctype html>
+<html lang=\\"en\\">
+<head><meta charset=\\"utf-8\\"><title>Error</title></head>
+<body>
+<pre>{
+ &nbsp;&quot;status&quot;: 500,
+ &nbsp;&quot;error&quot;: &quot;Internal Server Error&quot;,
+ &nbsp;&quot;message&quot;: &quot;boom!&quot;
+}</pre>
+</body>
+</html>",
+  "headers": Headers {
+    "object": Object {
+      "content-length": "265",
+      "content-security-policy": "default-src 'self'",
+      "content-type": "text/html",
+      "x-content-type-options": "nosniff",
     },
   },
-  "bytesTransferred": 0,
-  "finished": false,
-  "headers": Object {
-    "content-security-policy": "default-src 'self'",
-    "content-type": "text/html",
-    "x-content-type-options": "nosniff",
-  },
-  "started": false,
-  "statusCode": 500,
-  "statusMessage": undefined,
+  "status": 500,
+  "statusText": "",
+  "trailer": Promise {},
 }
 `;
 
 exports[`servie-errorhandler should render boom status errors 1`] = `
-Object {
-  "body": Object {
-    "bodyUsed": false,
-    "buffered": true,
-    "hasBody": true,
-    "headers": Object {
+Response {
+  "$rawBody": "<!doctype html>
+<html lang=\\"en\\">
+<head><meta charset=\\"utf-8\\"><title>Error</title></head>
+<body>
+<pre>{
+ &nbsp;&quot;statusCode&quot;: 400,
+ &nbsp;&quot;error&quot;: &quot;Bad Request&quot;,
+ &nbsp;&quot;message&quot;: &quot;data has an issue&quot;
+}</pre>
+</body>
+</html>",
+  "headers": Headers {
+    "object": Object {
       "content-length": "271",
-      "content-type": "text/plain",
+      "content-security-policy": "default-src 'self'",
+      "content-type": "text/html",
+      "x-content-type-options": "nosniff",
     },
   },
-  "bytesTransferred": 0,
-  "finished": false,
-  "headers": Object {
-    "content-security-policy": "default-src 'self'",
-    "content-type": "text/html",
-    "x-content-type-options": "nosniff",
-  },
-  "started": false,
-  "statusCode": 400,
-  "statusMessage": undefined,
+  "status": 400,
+  "statusText": "",
+  "trailer": Promise {},
 }
 `;
 
 exports[`servie-errorhandler should render http errors status error 1`] = `
-Object {
-  "body": Object {
-    "bodyUsed": false,
-    "buffered": true,
-    "hasBody": true,
-    "headers": Object {
-      "content-length": "271",
-      "content-type": "text/plain",
+Response {
+  "$rawBody": "<!doctype html>
+<html lang=\\"en\\">
+<head><meta charset=\\"utf-8\\"><title>Error</title></head>
+<body>
+<pre>{
+ &nbsp;&quot;status&quot;: 400,
+ &nbsp;&quot;error&quot;: &quot;Bad Request&quot;,
+ &nbsp;&quot;message&quot;: &quot;data has an issue&quot;
+}</pre>
+</body>
+</html>",
+  "headers": Headers {
+    "object": Object {
+      "content-length": "267",
+      "content-security-policy": "default-src 'self'",
+      "content-type": "text/html",
+      "x-content-type-options": "nosniff",
     },
   },
-  "bytesTransferred": 0,
-  "finished": false,
-  "headers": Object {
-    "content-security-policy": "default-src 'self'",
-    "content-type": "text/html",
-    "x-content-type-options": "nosniff",
-  },
-  "started": false,
-  "statusCode": 400,
-  "statusMessage": undefined,
+  "status": 400,
+  "statusText": "",
+  "trailer": Promise {},
 }
 `;
