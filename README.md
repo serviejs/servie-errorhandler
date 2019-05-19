@@ -16,14 +16,14 @@ npm install servie-errorhandler --save
 ## Usage
 
 ```ts
-import { Request } from 'servie'
-import { finalhandler } from 'servie-finalhandler'
-import { errorhandler } from 'servie-errorhandler'
+import { Request } from "servie";
+import { finalhandler } from "servie-finalhandler";
+import { errorhandler } from "servie-errorhandler";
 
-const app = compose([get(...), post(...)])
+const app = compose([get(), post()]);
 const req = new Request("/");
 
-app(req, finalhandler(req)).catch(errorhandler(req))
+app(req, finalhandler(req)).catch(errorhandler(req));
 ```
 
 ## TypeScript
