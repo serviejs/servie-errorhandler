@@ -1,33 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`servie-errorhandler should fail "gracefully" with non-error 1`] = `
-Response {
-  "$rawBody": "<!doctype html>
-<html lang=\\"en\\">
-<head><meta charset=\\"utf-8\\"><title>Error</title></head>
-<body>
-<pre>{
- &nbsp;&quot;status&quot;: 500,
- &nbsp;&quot;error&quot;: &quot;Internal Server Error&quot;,
- &nbsp;&quot;message&quot;: &quot;Error&quot;
-}</pre>
-</body>
-</html>",
-  "headers": Headers {
-    "object": Object {
-      "content-length": "265",
-      "content-security-policy": "default-src 'self'",
-      "content-type": "text/html",
-      "x-content-type-options": "nosniff",
-    },
-  },
-  "status": 500,
-  "statusText": "",
-  "trailer": Promise {},
-}
-`;
-
-exports[`servie-errorhandler should render an error 1`] = `
+exports[`errorhandler accept as array should fail and return html 1`] = `
 Response {
   "$rawBody": "<!doctype html>
 <html lang=\\"en\\">
@@ -54,7 +27,104 @@ Response {
 }
 `;
 
-exports[`servie-errorhandler should render boom status errors 1`] = `
+exports[`errorhandler accept html should fail and return html 1`] = `
+Response {
+  "$rawBody": "<!doctype html>
+<html lang=\\"en\\">
+<head><meta charset=\\"utf-8\\"><title>Error</title></head>
+<body>
+<pre>{
+ &nbsp;&quot;status&quot;: 500,
+ &nbsp;&quot;error&quot;: &quot;Internal Server Error&quot;,
+ &nbsp;&quot;message&quot;: &quot;boom!&quot;
+}</pre>
+</body>
+</html>",
+  "headers": Headers {
+    "object": Object {
+      "content-length": "265",
+      "content-security-policy": "default-src 'self'",
+      "content-type": "text/html",
+      "x-content-type-options": "nosniff",
+    },
+  },
+  "status": 500,
+  "statusText": "",
+  "trailer": Promise {},
+}
+`;
+
+exports[`errorhandler accept json should fail and return json 1`] = `
+Response {
+  "$rawBody": "{\\"status\\":500,\\"error\\":\\"Internal Server Error\\",\\"message\\":\\"boom!\\"}",
+  "headers": Headers {
+    "object": Object {
+      "content-length": "64",
+      "content-type": "application/json",
+      "x-content-type-options": "nosniff",
+    },
+  },
+  "status": 500,
+  "statusText": "",
+  "trailer": Promise {},
+}
+`;
+
+exports[`errorhandler default accepts should fail "gracefully" with non-error 1`] = `
+Response {
+  "$rawBody": "<!doctype html>
+<html lang=\\"en\\">
+<head><meta charset=\\"utf-8\\"><title>Error</title></head>
+<body>
+<pre>{
+ &nbsp;&quot;status&quot;: 500,
+ &nbsp;&quot;error&quot;: &quot;Internal Server Error&quot;,
+ &nbsp;&quot;message&quot;: &quot;Error&quot;
+}</pre>
+</body>
+</html>",
+  "headers": Headers {
+    "object": Object {
+      "content-length": "265",
+      "content-security-policy": "default-src 'self'",
+      "content-type": "text/html",
+      "x-content-type-options": "nosniff",
+    },
+  },
+  "status": 500,
+  "statusText": "",
+  "trailer": Promise {},
+}
+`;
+
+exports[`errorhandler default accepts should render an error 1`] = `
+Response {
+  "$rawBody": "<!doctype html>
+<html lang=\\"en\\">
+<head><meta charset=\\"utf-8\\"><title>Error</title></head>
+<body>
+<pre>{
+ &nbsp;&quot;status&quot;: 500,
+ &nbsp;&quot;error&quot;: &quot;Internal Server Error&quot;,
+ &nbsp;&quot;message&quot;: &quot;boom!&quot;
+}</pre>
+</body>
+</html>",
+  "headers": Headers {
+    "object": Object {
+      "content-length": "265",
+      "content-security-policy": "default-src 'self'",
+      "content-type": "text/html",
+      "x-content-type-options": "nosniff",
+    },
+  },
+  "status": 500,
+  "statusText": "",
+  "trailer": Promise {},
+}
+`;
+
+exports[`errorhandler default accepts should render boom status errors 1`] = `
 Response {
   "$rawBody": "<!doctype html>
 <html lang=\\"en\\">
@@ -81,7 +151,7 @@ Response {
 }
 `;
 
-exports[`servie-errorhandler should render http errors status error 1`] = `
+exports[`errorhandler default accepts should render http errors status error 1`] = `
 Response {
   "$rawBody": "<!doctype html>
 <html lang=\\"en\\">
