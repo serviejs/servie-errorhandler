@@ -42,7 +42,7 @@ interface Output {
 /**
  * Convert an error into an "output" object.
  */
-function toOutput(err: unknown, production: boolean): Output {
+function toOutput(err: any, production: boolean): Output {
   const error: {
     output?: {
       statusCode?: number;
@@ -57,7 +57,7 @@ function toOutput(err: unknown, production: boolean): Output {
     err == null
       ? { message: `Empty error: ${err}` }
       : typeof err === "object"
-      ? (err as any)
+      ? err
       : { message: String(err) };
 
   const output = error.output || {};
