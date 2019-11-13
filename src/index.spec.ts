@@ -8,8 +8,14 @@ describe("errorhandler", () => {
     const req = new Request("/");
     const handler = errorhandler(req);
 
-    it('should fail "gracefully" with non-error', () => {
+    it("should fail gracefully with non-error", () => {
       const res = handler("test");
+
+      expect(res).toMatchSnapshot();
+    });
+
+    it("should fail gracefully with empty error", () => {
+      const res = handler(undefined);
 
       expect(res).toMatchSnapshot();
     });
@@ -40,7 +46,7 @@ describe("errorhandler", () => {
     it("should fail and return html", () => {
       const res = handler(new Error("boom!"));
 
-      expect(res.headers.get('content-type')).toEqual('text/html')
+      expect(res.headers.get("content-type")).toEqual("text/html");
       expect(res).toMatchSnapshot();
     });
   });
@@ -52,7 +58,7 @@ describe("errorhandler", () => {
     it("should fail and return json", () => {
       const res = handler(new Error("boom!"));
 
-      expect(res.headers.get('content-type')).toEqual('application/json')
+      expect(res.headers.get("content-type")).toEqual("application/json");
       expect(res).toMatchSnapshot();
     });
   });

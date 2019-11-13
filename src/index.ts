@@ -23,7 +23,7 @@ export function errorhandler(
   const log =
     options.log || (env === "test" ? Function.prototype : console.error);
 
-  return function errorhandler(err: any) {
+  return function errorhandler(err: unknown) {
     const output = toOutput(err, production);
     log(err);
     return render(req, output);
@@ -42,15 +42,32 @@ interface Output {
 /**
  * Convert an error into an "output" object.
  */
-function toOutput(err: any, production: boolean): Output {
-  const output = err.output || {};
+function toOutput(err: unknown, production: boolean): Output {
+  const error: {
+    output?: {
+      statusCode?: number;
+      headers?: Record<string, string | string[]>;
+      payload?: any;
+    };
+    statusCode?: number;
+    status?: number;
+    headers?: Record<string, string | string[]>;
+    message?: string;
+  } =
+    err == null
+      ? { message: `Empty error: ${err}` }
+      : typeof err === "object"
+      ? (err as any)
+      : { message: String(err) };
+
+  const output = error.output || {};
   const status =
-    Number(output.statusCode || err.statusCode || err.status) || 500;
-  const headers = output.headers || err.headers || {};
+    Number(output.statusCode || error.statusCode || error.status) || 500;
+  const headers = output.headers || error.headers || {};
   const payload = output.payload || {
     status,
     error: STATUS_CODES[status] || "Error",
-    message: (production ? undefined : err.message) || "Error"
+    message: (production ? undefined : error.message) || "Error"
   };
 
   return { status, headers, payload };

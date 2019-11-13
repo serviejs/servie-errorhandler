@@ -70,7 +70,7 @@ Response {
 }
 `;
 
-exports[`errorhandler default accepts should fail "gracefully" with non-error 1`] = `
+exports[`errorhandler default accepts should fail gracefully with empty error 1`] = `
 Response {
   "$rawBody": "<!doctype html>
 <html lang=\\"en\\">
@@ -79,13 +79,40 @@ Response {
 <pre>{
  &nbsp;&quot;status&quot;: 500,
  &nbsp;&quot;error&quot;: &quot;Internal Server Error&quot;,
- &nbsp;&quot;message&quot;: &quot;Error&quot;
+ &nbsp;&quot;message&quot;: &quot;Empty error: undefined&quot;
 }</pre>
 </body>
 </html>",
   "headers": Headers {
     "object": Object {
-      "content-length": "265",
+      "content-length": "282",
+      "content-security-policy": "default-src 'self'",
+      "content-type": "text/html",
+      "x-content-type-options": "nosniff",
+    },
+  },
+  "status": 500,
+  "statusText": "",
+  "trailer": Promise {},
+}
+`;
+
+exports[`errorhandler default accepts should fail gracefully with non-error 1`] = `
+Response {
+  "$rawBody": "<!doctype html>
+<html lang=\\"en\\">
+<head><meta charset=\\"utf-8\\"><title>Error</title></head>
+<body>
+<pre>{
+ &nbsp;&quot;status&quot;: 500,
+ &nbsp;&quot;error&quot;: &quot;Internal Server Error&quot;,
+ &nbsp;&quot;message&quot;: &quot;test&quot;
+}</pre>
+</body>
+</html>",
+  "headers": Headers {
+    "object": Object {
+      "content-length": "264",
       "content-security-policy": "default-src 'self'",
       "content-type": "text/html",
       "x-content-type-options": "nosniff",
